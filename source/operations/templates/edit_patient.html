@@ -91,7 +91,7 @@
                             </div>
                             <div class="text-md-end pe-5">
                                 {% if object.profile_pic and object.profile_pic.name %}
-                                <img src="{% static object.profile_pic.name%}" alt="{{ object.profile_pic.url }}" alt="" class="rounded-circle userimg">
+                                <img src="{% static object.profile_pic.name%}" alt="Student Image" alt="" class="rounded-circle userimg">
                                 {% else %}
                                 <img src="{% static 'images/patient_pics/userpic.png' %}" alt="Pofile pic" alt="" class="rounded-circle userimg">
                                 {% endif %}
