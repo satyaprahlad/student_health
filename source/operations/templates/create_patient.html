@@ -1,0 +1,156 @@
+{% extends 'layouts/default/page.html' %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% load widget_tweaks %}
+ {% load extra_filters %}
+        {% load i18n %}
+    {% get_current_language as language_code %}
+{% block content %}
+
+<h1 class="text-center">{% trans 'Create a Patient' %}</h1>
+
+    <main>
+        <div class="custom-container">
+<div class="row">
+<div ng-controller="createPatienntController" ng-cloak>
+
+      <form method="post" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+    <h2 class="fbold h2 text-uppercase pb-2">Quick Info</h2>
+          <div class="form-group">
+              <div class="fieldWrapper form-group">
+                  {{ form.first_name.errors }}
+                  {{ form.first_name.label_tag }}
+                  {{ form.first_name|attr:"class:form-control" }}
+              </div>
+          </div>
+
+    <div class="fieldWrapper form-group">
+        {{ form.last_name.errors }}
+        {{ form.last_name.label_tag }}
+        {{ form.last_name|attr:"class:form-control"  }}
+    </div>
+
+    <div class="fieldWrapper form-group">
+        {{ form.profile_pic.errors }}
+        {{ form.profile_pic.label_tag }}
+        {{ form.profile_pic|attr:"class:form-control"  }}
+    </div>
+
+    <div class="fieldWrapper form-group">
+        {{ form.date_of_birth.errors }}
+        {{ form.date_of_birth.label_tag }}
+        {{ form.date_of_birth|attr:"class:form-control"  }}
+    </div>
+    <div class="fieldWrapper form-group">
+        {{ form.gender.errors }}
+        {{ form.gender.label_tag }}
+        {{ form.gender |attr:"class:form-control" }}
+    </div>
+
+    <div class="fieldWrapper form-group">
+        {{ form.height.errors }}
+        {{ form.height.label_tag }}
+        {{ form.height|attr:"class:form-control"  }}
+    </div>
+
+    <div class="fieldWrapper form-group">
+        {{ form.weight.errors }}
+        {{ form.weight.label_tag }}
+        {{ form.weight|attr:"class:form-control"  }}
+    </div>
+    <h2 class="fbold h2 text-uppercase pb-2">Current Conditions</h2>
+    <div class="fieldWrapper form-group">
+
+        {{ form.chronic_conditon.errors }}
+        {{ form.chronic_condition.label_tag }}
+        {{ form.chronic_condition |attr:"class:form-control" }}
+    </div>
+    <h2 class="fbold h2 text-uppercase pb-2">Known Allergies</h2>
+    <div class="fieldWrapper form-group">
+        {{ form.known_food_alergy.error }}
+        {{ form.known_food_alergy.label_tag }}
+        {{ form.known_food_alergy |attr:"class:form-control" }}
+    </div>
+    <div class="fieldWrapper form-group">
+              {{ form.known_insects_alergy.error }}
+              {{ form.known_insects_alergy.label_tag }}
+              {{ form.known_insects_alergy |attr:"class:form-control" }}
+          </div>
+    <div class="fieldWrapper form-group">
+        {{ form.known_medication_alergy.error }}
+        {{ form.known_medication_alergy.label_tag }}
+        {{ form.known_medication_alergy|attr:"class:form-control"  }}
+    </div>
+    <div class="fieldWrapper form-group">
+              {{ form.known_contact_alergy.error }}
+              {{ form.known_contact_alergy.label_tag }}
+              {{ form.known_contact_alergy|attr:"class:form-control"  }}
+          </div>
+    <div class="fieldWrapper form-group">
+        {{ form.known_common_pets_alergy.error }}
+        {{ form.known_common_pets_alergy.label_tag }}
+        {{ form.known_common_pets_alergy|attr:"class:form-control"  }}
+    </div>
+    <div class="fieldWrapper form-group">
+        {{ form.known_seasonal_alergy.error }}
+        {{ form.known_seasonal_alergy.label_tag }}
+        {{ form.known_seasonal_alergy |attr:"class:form-control" }}
+    </div>
+    <div class="fieldWrapper form-group">
+        {{ form.notes.error }}
+        {{ form.notes.label_tag }}
+        {{ form.notes|attr:"class:form-control"  }}
+    </div>
+
+
+       <h2 class="fbold h2 text-uppercase pb-2"> Add Symptoms</h2>
+        {{ symptoms_form_set.non_form_errors }}
+        {{ symptoms_form_set.management_form }}
+        {% for form in symptoms_form_set %}
+        <div class="d-flex py-1 px-1 inline {{ symptoms_form_set.prefix }}">
+            <table>
+                 {% bootstrap_form form %}
+            </table>
+
+        </div>
+        {% endfor %}
+
+        <h2 class="fbold h2 text-uppercase pb-2">Add Care Providers</h2>
+        {{ care_provider_form_set.non_form_errors }}
+        {{ care_provider_form_set.management_form }}
+        {% for form in care_provider_form_set %}
+        <div class="d-flex py-1 px-1 inline {{ care_provider_form_set.prefix }}">
+            <table>
+                 {% bootstrap_form form %}
+            </table>
+
+        </div>
+        {% endfor %}
+
+
+        <h2 class="fbold h2 text-uppercase pb-2">Add Guardians</h2>
+        {{ guardian_form_set.non_form_errors }}
+        {{ guardian_form_set.management_form }}
+        {% for form in guardian_form_set %}
+        <div class="d-flex py-1 px-1 inline {{ guardian_form_set.prefix }}">
+            <table>
+                 {% bootstrap_form form %}
+            </table>
+
+        </div>
+        {% endfor %}
+        <button class="btn btn-success">{% trans 'Create Patient' %}</button>
+
+        </form>
+
+</div>
+</div>
+        </div>
+
+        </div>
+    </main>
+
+{% endblock %}

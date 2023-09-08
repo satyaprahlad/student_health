@@ -1,0 +1,44 @@
+{% extends 'layouts/default/page.html' %}
+{% load extra_filters %}
+{% block content %}
+{% load extra_filters %}
+{% load static %}
+{% load i18n %}
+{% get_current_language as language_code %}
+<main>
+        <div class="custom-container">
+            <div ng-controller="searchController" ng-cloak>
+                <md-content class="md-padding">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <input type="text" ng-model="searchTerm" id="searchTerm" ng-model="searchTerm"
+                                   class="typeahead" placeholder="Search" style="    min-width: 80%;
+    height: 70%;"></input>
+                            <label>
+                                <div><span class="icon-magnifying-glass icomoon"></span></div>
+                            </label>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0"
+                                 id="add_care_provider">
+                                <a href="{% url 'operations:add_patient' %}" title="Create New Patient"
+                                   class="icon-link"><span class="icon-plus icomoon"></span></a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </md-content>
+            </div>
+        </div>
+    </main>
+    {#    <script src="{%static 'js/jquery-3.6.4.min.js' %}"></script>#}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!--[if lte IE 9]>
+        <script src="{% static 'js/ie.lteIE9.js' %}"></script>
+{% endblock %}

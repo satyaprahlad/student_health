@@ -1,0 +1,145 @@
+@import "variable";
+@import "mixin";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+body {
+  @include siteMain;
+}
+
+.custom-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.fbold {
+  font-weight: 700;
+}
+
+.fsbold {
+  font-weight: 600;
+}
+
+header {
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+  h3 {
+    color: $gray;
+  }
+  nav {
+    background: $primary;
+
+    .nav-link {
+      div {
+        width: 67px;
+        height: 67px;
+        background: $white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 90px;
+        margin: 0 30px;
+
+        .icomoon {
+          font-size: $fsize * 3 - 5;
+          color: $primary;
+        }
+      }
+      p {
+        color: $white;
+        font-size: $fsize - 2;
+      }
+    }
+  }
+}
+
+main {
+  padding-top: 85px;
+
+  @include max($md) {
+    padding-top: 25px;
+  }
+
+  .userimg {
+    width: 160px;
+
+    @include max($md) {
+      width: 120px;
+    }
+  }
+
+  .inner-card {
+    background: $lightblue;
+  }
+  .icon-link {
+    width: 67px;
+    height: 67px;
+    background: $white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 90px;
+    margin: 0 5px;
+    text-decoration: none;
+    display: inline-block;
+
+    @include min($lg) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .icomoon {
+      font-size: $fsize * 3 - 5;
+      color: $primary;
+    }
+  }
+  .recentsymptons {
+    border-bottom: 10px solid $primary;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid $primary;
+      position: absolute;
+      right: -10px;
+      bottom: -15px;
+
+      @include max($md) {
+        display: none;
+      }
+    }
+    .col-md-4,
+    .col-md-3 {
+      position: relative;
+
+      &:before {
+        content: "";
+        width: 30px;
+        height: 30px;
+        background: $primary;
+        position: absolute;
+        right: 0;
+        bottom: -20px;
+        border-radius: 50px;
+
+        @include max($md) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.icondiv {
+  top: 10px;
+  right: 10px;
+
+  .icomoon {
+    font-size: 30px;
+    color: $primary;
+  }
+}

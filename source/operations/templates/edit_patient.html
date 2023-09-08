@@ -1,0 +1,295 @@
+{% extends 'layouts/default/page.html' %}
+{% load extra_filters %}
+{% block content %}
+{% load extra_filters %}
+{% load static %}
+    {% load i18n %}
+{% get_current_language as language_code %}
+<div ng-controller="patientDetailsController">
+<header>
+
+        <!-- nav -->
+        <nav>
+            <div class="custom-container">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="nav-link d-flex d-md-block">
+                                        <div><span class="icon-menu icomoon"></span></div>
+                                        <p class="text-center mb-0 p-0 pt-2 align-self-center">Menu</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item" id="add_symptom">
+                                    <a href="javascript:void(0)" class="nav-link d-flex d-md-block">
+                                        <div><span class="icon-fever icomoon"></span></div>
+                                        <p class="text-center mb-0 p-0 pt-2 align-self-center">Tag a Symptom</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item" id="add_immunization">
+                                    <a href="javascript:void(0)" class="nav-link d-flex d-md-block">
+                                        <div><span class="icon-injection icomoon"></span></div>
+                                        <p class="text-center mb-0 p-0 pt-2 align-self-center">Immunizations</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item" id="update_notes">
+                                    <a href="javascript:void(0)" class="nav-link d-flex d-md-block">
+                                        <div><span class="icon-notes icomoon"></span></div>
+                                        <p class="text-center mb-0 p-0 pt-2 align-self-center">Notes</p>
+                                    </a>
+                                </li>
+                            </ul>
+                                     <span>     <input type="text" ng-controller="searchController" ng-model="searchTerm" id="searchTerm" ng-model="searchTerm" class="typeahead" placeholder="Search by name or id" style="
+    height: 100%;"></input></span>
+                            <a href="javascript:void(0)" class="nav-link d-flex d-md-block">
+                                <div><span class="icon-magnifying-glass icomoon"></span></div>
+                                <p class="text-center mb-0 p-0 pt-2 align-self-center">Search</p>
+                            </a>
+                               <a href="{% url 'operations:add_patient' %}" class="nav-link d-flex d-md-block">
+                                   <div><span class="icon-plus icomoon"></span></div>
+                                    <p class="text-center mb-0 p-0 pt-2 align-self-center">Create Patient</p>
+                               </a>
+
+
+
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+    </header>
+    <!-- main -->
+    <main>
+        <div class="custom-container">
+            <div class="row">
+
+                <!-- left -->
+                <div class="col-md-8">
+                    <div class="card rounded shadow p-3 position-relative">
+                        <div class="d-md-flex justify-content-between">
+                            <div class="align-self-center">
+                                <h2 class="fbold h2 text-uppercase pb-2">Quick Info</h2>
+                                <div class="d-flex">
+                                    <div class="pe-5 me-5">
+                                        <h6><span class="fbold">NAME: </span>{{ object.get_full_name|upper }}</h6>
+                                        <h6><span class="fbold">DOB: </span>{{ object.date_of_birth |date:"m/d/Y" }}</h6>
+                                        <h6><span class="fbold">GENDER: </span>{{ object.gender.name|upper }}</h6>
+                                    </div>
+                                    <div class="pe-5">
+                                        <h6><span class="fbold">HEIGHT: </span>{{ object.height }}</h6>
+                                        <h6><span class="fbold">WEIGHT: </span>{{ object.weight }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-md-end pe-5">
+                                <img src="{% static object.profile_pic.name%}" alt="{{ object.profile_pic.url }}" alt="" class="rounded-circle userimg">
+                            </div>
+                            <div class="position-absolute icondiv"><span class="icon-information-button icomoon"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card rounded shadow p-3 mt-3 position-relative">
+                        <div class="">
+                            <div class="align-self-center">
+                                <h2 class="fbold h2 text-uppercase pb-2">CURRENT CONDITIONS</h2>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6><span class="fbold">CRONIC CONDITIONS: </span>{{ object.chronic_condition }}</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6><span class="fbold">RECENT ILLNESS: </span>&NBSP;</h6>
+                                        <h6><span class="fbold">PAST 30DAYS: </span>{{ object.past_30_days_condition }}</h6>
+                                        <h6><span class="fbold">PAST 90 DAYS: </span>{{ object.past_90_days_condition }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute icondiv"><span class="icon-notes icomoon btn" id="update_current_conditions"></span>
+                        </div>
+                    </div>
+
+                    <div class="card rounded shadow p-3 mt-3 ">
+                        <div class="">
+                            <div class="align-self-center">
+                                <h2 class="fbold h2 text-uppercase pb-2">KNOWN ALLERGIES</h2>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6><span class="fbold">FOOD: </span>{{ object.known_food_alergy}}</h6>
+                                        <h6><span class="fbold">MEDICATIONS: </span>{{ object.known_medication_alergy}}</h6>
+                                        <h6><span class="fbold">COMMON PETS: </span>{{ object.known_common_pets_alergy}}</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6><span class="fbold">INSECTS: </span>{{ object.known_insects_alergy}}</h6>
+                                        <h6><span class="fbold">CONTACT: </span>{{ object.known_contact_alergy}}</h6>
+                                        <h6><span class="fbold">SEASPMA: </span>{{ object.known_seasonal_alergy}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute icondiv" id="update_known_allergies"><span class="icon-secured icomoon btn"></span></div>
+                    </div>
+
+                    <div class="card rounded shadow p-3 mt-3 position-relative">
+                        <div class="">
+                            <div class="align-self-center">
+                                <h2 class="fbold h2 text-uppercase pb-2">RECENT SYMPTONS</h2>
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <div class="row recentsymptons">
+                                            <div class="col-md-4">
+                                                <h6><span class="fbold">15 DAYS</h6>
+                                                {% if object.symptoms.all|less_than_n_days_symptoms:15 %}
+
+                                                {% for symptom in object.symptoms.all|less_than_n_days_symptoms:15 %}
+                                                         <p class="p-0 m-0">{{ symptom.name }}</p>
+                                                {% endfor %}
+                                                {% else %}
+                                                <p class="p-0 m-0">No new symptons</p>
+                                                <p class="p-0 m-0">recorded</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6><span class="fbold">30 DAYS</h6>
+                                                {% if object.symptoms.all|less_than_n_days_symptoms:30 %}
+
+                                                {% for symptom in object.symptoms.all|less_than_n_days_symptoms:30 %}
+                                                         <p class="p-0 m-0">{{ symptom.name }}</p>
+                                                {% endfor %}
+                                                {% else %}
+                                                <p class="p-0 m-0">No new symptons</p>
+                                                <p class="p-0 m-0">recorded</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h6><span class="fbold">90 DAYS</h6>
+                                                 {% if object.symptoms.all|less_than_n_days_symptoms:90 %}
+
+                                                {% for symptom in object.symptoms.all|less_than_n_days_symptoms:90 %}
+                                                         <p class="p-0 m-0">{{ symptom.name }}</p>
+                                                {% endfor %}
+                                                {% else %}
+                                                <p class="p-0 m-0">No new symptons</p>
+                                                <p class="p-0 m-0">recorded</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="position-absolute icondiv"><span class="icon-fever1 icomoon"></span></div>
+                    </div>
+                </div>
+                <!--/ left -->
+                <!-- right -->
+                <div class="col-md-4 mb-4">
+                    <div class="card p-2 rounded shadow ">
+                        <h2 class="fbold h2 text-uppercase pb-2 text-center">care</h2>
+                        {% for doctor in object.care_providers.all %}
+                        <div class="card inner-card rounded p-3 border-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="fbold h5">{{ doctor.name }}, {{ doctor.qualification }} </h5>
+                                    <p class="p-0 m-0">{{ doctor.specialization }}</p>
+                                    <p class="p-0 m-0">{{ doctor.institute }}</p>
+                                </div>
+                                <div class="col-md-6 align-self-center">
+                                    <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0">
+                                        <a href="javascript:void(0)" class="icon-link"><span
+                                                class="icon-telephone icomoon"></span></a>
+                                        <a href="javascript:void(0)" class="icon-link"><span
+                                                class="icon-mail icomoon"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <div class="card inner-card rounded p-3 mt-2 border-0 mb-5">
+                            <div class="row">
+                                <div class="col-md-8 align-self-center">
+                                    <h5 class="fbold h5">ADD A HEALTH CARE PROVIDER</h5>
+
+                                </div>
+                                <div class="col-md-4 align-self-center">
+                                    <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0" id="add_care_provider">
+                                        <a href="javascript:void(0)" class="icon-link"><span
+                                                class="icon-plus icomoon"></span></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-2 rounded shadow mt-4">
+                        <h2 class="fbold h2 text-uppercase pb-2 text-center">Guardians</h2>
+                        {% for guardian in object.guardians.all %}
+                        <div class="card inner-card rounded p-3 border-0">
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <h5 class="fbold h5">{{ guardian.name }}</h5>
+                                    <p class="p-0 m-0">{{guardian.relation}}</p>
+                                </div>
+                                <div class="col-md-6 align-self-center">
+                                    <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0">
+                                        <a href="javascript:void(0)" class="icon-link"><span
+                                                class="icon-telephone icomoon"></span></a>
+                                        <a href="javascript:void(0)" class="icon-link" style="line-height: 60px;"><i
+                                                class="bi bi-chat-dots icomoon"></i></a>
+                                        <a href="javascript:void(0)" class="icon-link"><span
+                                                class="icon-mail icomoon"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                    <div class="card inner-card rounded p-3 mt-2 border-0 mb-5">
+                            <div class="row">
+                                <div class="col-md-8 align-self-center">
+                                    <h5 class="fbold h5">ADD GUARDIAN</h5>
+
+                                </div>
+                                <div class="col-md-4 align-self-center">
+                                    <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0" id="add_guardian">
+                                        <a href="javascript:void(0)" class="icon-link"><span
+                                                class="icon-plus icomoon"></span></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ right -->
+            </div>
+        </div>
+    </main>
+    <!--/ main -->
+    <!-- scripes-->
+{#    <script src="{%static 'js/jquery-3.6.4.min.js' %}"></script>#}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!--[if lte IE 9]>
+        <script src="{% static 'js/ie.lteIE9.js' %}"></script>
+{#    <script src="{% static 'js/jquery-ui.js'%}"></script>#}
+    <![endif]-->
+</div>
+
+{% endblock %}
+
+

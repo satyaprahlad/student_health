@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+body {
+  -webkit-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: #eef3f8;
+}
+
+.custom-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.fbold {
+  font-weight: 700;
+}
+
+.fsbold {
+  font-weight: 600;
+}
+
+header a {
+  text-decoration: none;
+  color: #000;
+}
+header h3 {
+  color: #a5a2a2;
+}
+header nav {
+  background: #3a6db0;
+}
+header nav .nav-link div {
+  width: 67px;
+  height: 67px;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 90px;
+  margin: 0 30px;
+}
+header nav .nav-link div .icomoon {
+  font-size: 40px;
+  color: #3a6db0;
+}
+header nav .nav-link p {
+  color: #fff;
+  font-size: 13px;
+}
+
+main {
+  padding-top: 85px;
+}
+@media (max-width: 768px) {
+  main {
+    padding-top: 25px;
+  }
+}
+main .userimg {
+  width: 160px;
+}
+@media (max-width: 768px) {
+  main .userimg {
+    width: 120px;
+  }
+}
+main .inner-card {
+  background: #d7e7f6;
+}
+main .icon-link {
+  width: 67px;
+  height: 67px;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 90px;
+  margin: 0 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+@media (min-width: 992px) {
+  main .icon-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+main .icon-link .icomoon {
+  font-size: 40px;
+  color: #3a6db0;
+}
+main .recentsymptons {
+  border-bottom: 10px solid #3a6db0;
+  position: relative;
+}
+main .recentsymptons::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #3a6db0;
+  position: absolute;
+  right: -10px;
+  bottom: -15px;
+}
+@media (max-width: 768px) {
+  main .recentsymptons::before {
+    display: none;
+  }
+}
+main .recentsymptons .col-md-4,
+main .recentsymptons .col-md-3 {
+  position: relative;
+}
+main .recentsymptons .col-md-4:before,
+main .recentsymptons .col-md-3:before {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background: #3a6db0;
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  border-radius: 50px;
+}
+@media (max-width: 768px) {
+  main .recentsymptons .col-md-4:before,
+  main .recentsymptons .col-md-3:before {
+    display: none;
+  }
+}
+
+.icondiv {
+  top: 10px;
+  right: 10px;
+}
+.icondiv .icomoon {
+  font-size: 30px;
+  color: #3a6db0;
+}/*# sourceMappingURL=style.css.map */

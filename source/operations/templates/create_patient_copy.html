@@ -1,0 +1,52 @@
+{% extends 'layouts/default/page.html' %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% block content %}
+
+<h4>{% trans 'Create a Patient' %}</h4>
+<form method="post" action="http://127.0.0.1:8012/operations/add/patient">
+
+        {% csrf_token %}
+        {{ form.non_form_errors }}
+        {% bootstrap_form form %}
+        <h5 class="text-info">Add Symptoms</h5>
+        {{ symptoms_form_set.non_form_errors }}
+        {{ symptoms_form_set.management_form }}
+        {% for form in symptoms_form_set %}
+        <div class="d-flex py-1 px-1 inline {{ symptoms_form_set.prefix }}">
+            <table>
+                 {% bootstrap_form form %}
+            </table>
+
+        </div>
+        {% endfor %}
+
+         <h5 class="text-info">Add Care Providers</h5>
+        {{ care_provider_form_set.non_form_errors }}
+        {{ care_provider_form_set.management_form }}
+        {% for form in care_provider_form_set %}
+        <div class="d-flex py-1 px-1 inline {{ care_provider_form_set.prefix }}">
+            <table>
+                 {% bootstrap_form form %}
+            </table>
+
+        </div>
+        {% endfor %}
+
+
+        <h5 class="text-info">Add Guardians</h5>
+        {{ guardian_form_set.non_form_errors }}
+        {{ guardian_form_set.management_form }}
+        {% for form in guardian_form_set %}
+        <div class="d-flex py-1 px-1 inline {{ guardian_form_set.prefix }}">
+            <table>
+                 {% bootstrap_form form %}
+            </table>
+
+        </div>
+        {% endfor %}
+        <button class="btn btn-success">{% trans 'Create Patient' %}</button>
+
+    </form>
+
+{% endblock %}
