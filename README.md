@@ -57,3 +57,11 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'student_health'@'localhost' WITH GRANT OP
 Query OK, 0 rows affected (0.01 sec)
 
 ```
+
+
+
+
+#### 
+restore backup.
+admin1@gamil.com
+india12345
