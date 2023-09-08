@@ -24,7 +24,7 @@ pipenv shell
 
 1. Edit `source/app/settings.py` if you want
 
-### Apply migrations
+### Apply migrations if you dint not restore from backup
 
 ```bash
 python source/manage.py migrate
@@ -62,6 +62,8 @@ Query OK, 0 rows affected (0.01 sec)
 
 
 #### 
-restore backup.
+restore backup loated source/student_health_backup.sql
+
+
 admin1@gamil.com
 india12345
