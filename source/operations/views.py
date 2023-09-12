@@ -20,7 +20,7 @@ from operations.models import Patient
 from operations.serializers import PatientSerializer
 
 logger = logging.getLogger(__name__)
-class OprationsTemplateView(TemplateView):
+class OprationsTemplateView(LoginRequiredMixin,TemplateView):
     template_name = 'operations_home.html'
 
 class SearchPatientView(LoginRequiredMixin, APIView):

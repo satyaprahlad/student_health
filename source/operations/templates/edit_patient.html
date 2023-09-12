@@ -7,7 +7,6 @@
 {% get_current_language as language_code %}
 <div ng-controller="patientDetailsController">
 <header>
-
         <!-- nav -->
         <nav>
             <div class="custom-container">
@@ -48,17 +47,11 @@
                             </ul>
                                      <span>     <input type="text" ng-controller="searchController" ng-model="searchTerm" id="searchTerm" ng-model="searchTerm" class="typeahead" placeholder="Search by name or id" style="
     height: 100%;"></input></span>
-                            <a href="javascript:void(0)" class="nav-link d-flex d-md-block">
-                                <div><span class="icon-magnifying-glass icomoon"></span></div>
-                                <p class="text-center mb-0 p-0 pt-2 align-self-center">Search</p>
-                            </a>
+
                                <a href="{% url 'operations:add_patient' %}" class="nav-link d-flex d-md-block">
                                    <div><span class="icon-plus icomoon"></span></div>
                                     <p class="text-center mb-0 p-0 pt-2 align-self-center">Create Patient</p>
                                </a>
-
-
-
 
                         </div>
                     </div>
