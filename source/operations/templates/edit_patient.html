@@ -275,16 +275,23 @@
                 <!--/ right -->
             </div>
         </div>
+        <div class="custom-container">
+            <div class="chatbox" id="chatbox"></div>
+        <div class="input-area">
+            <input type="text" id="userInput" class="user-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        </div>
     </main>
     <!--/ main -->
     <!-- scripes-->
-{#    <script src="{%static 'js/jquery-3.6.4.min.js' %}"></script>#}
+
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-    <!--[if lte IE 9]>
-        <script src="{% static 'js/ie.lteIE9.js' %}"></script>
-{#    <script src="{% static 'js/jquery-ui.js'%}"></script>#}
-    <![endif]-->
+
+    <script src="{% static 'js/ie.lteIE9.js' %}"></script>
+    <script src="{% static 'js/bot.js' %}"></script>
+
 </div>
 
 {% endblock %}

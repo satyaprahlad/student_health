@@ -233,4 +233,4 @@ audit_fields = ['created_by', 'updated_by', 'created_at', 'updated_at']
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_TRUSTED_ORIGINS = ['http://localhost:4200']
 
-medisearch_api_key = "e677b76b-2868-41b2-8169-3ce7ce5827a7"
+medisearch_api_key =  os.environ.get("medisearch_api_key")

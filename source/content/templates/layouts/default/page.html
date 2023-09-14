@@ -74,7 +74,31 @@
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bronx Bears - Student Health Portal</title>
+    <style>
+        .container {
+    margin-top: 50px;
+}
 
+textarea, button {
+    margin: 10px;
+}
+
+textarea {
+    width: 100%;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#output {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+}
+    </style>
 </head>
 
 <body ng-app="instituteApp" ng-controller="applicationController">
@@ -130,57 +154,7 @@
         <!-- nav -->
 
     </header>
-{#<nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">#}
-{##}
-{#    <a class="navbar-brand" href="{% url 'index' %}">{% trans 'Home' %}</a>#}
-{##}
-{#    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">#}
-{#        <span class="navbar-toggler-icon"></span>#}
-{#    </button>#}
-{##}
-{#    <div class="collapse navbar-collapse" id="navbarsExampleDefault">#}
-{#        <ul class="navbar-nav mr-auto">#}
-{#            {% if request.user.is_authenticated %}#}
-{##}
-{#            <li class="nav-item">#}
-{#                <a class="nav-link" ng-href="{% url 'operations:home' %}" target="_self">{% trans 'Operations' %}</a>#}
-{#            </li>#}
-{##}
-{#            {% if request.user.is_superuser %}#}
-{##}
-{##}
-{#            {% endif %} -->#}
-{##}
-{#            {% else %}#}
-{#            <li class="nav-item">#}
-{#                <a class="nav-link" href="{% url 'accounts:log_in' %}">{% trans 'Log in' %}</a>#}
-{#            </li>#}
-{#            {% endif %}#}
-{#        </ul>#}
-{##}
-{#    </div>#}
-{#    {% if request.user.is_authenticated %}#}
-{#    <div class="dropdown">#}
-{#        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"#}
-{#                aria-haspopup="true" aria-expanded="false">#}
-{#         {% if request.user.first_name %}#}
-{#            Hi <b>{{ request.user.first_name }}</b>#}
-{#        {% else %}#}
-{#            HI <b>{{ request.user.username }}</b>#}
-{#         {% endif %}#}
-{#        </button>#}
-{#        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">#}
-{#            {% if request.user.is_superuser %}#}
-{#               <a class="dropdown-item" href="{% url 'admin:login' %}"target="_blank">{% trans 'Administration' %}</a>#}
-{#            {% endif %}#}
-{#            <a class="dropdown-item" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>#}
-{#            <a class="dropdown-item" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>#}
-{#            <a class="dropdown-item" href="{% url 'accounts:change_email' %}">{% trans 'Change email' %}</a>#}
-{#            <a class="dropdown-item" href="{% url 'accounts:log_out' %}">{% trans 'Log out' %}</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    {% endif %}#}
-{#</nav>#}
+
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modal">
   <div class="modal-dialog" role="document">

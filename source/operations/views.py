@@ -1,13 +1,16 @@
 import logging
+import time
 
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalUpdateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import StreamingHttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
+from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView, UpdateView, TemplateView
 from rest_framework.response import Response
@@ -18,7 +21,8 @@ from operations.forms import PatientForm, SymptomsFormSet, CareProviderFormSet, 
     UpdateKnownAllergiesModalForm, HealthCareProviderForm, GuardianModalForm
 from operations.models import Patient
 from operations.serializers import PatientSerializer
-
+from medisearch_client import MediSearchClient
+from app.settings import medisearch_api_key
 logger = logging.getLogger(__name__)
 class OprationsTemplateView(LoginRequiredMixin,TemplateView):
     template_name = 'operations_home.html'
@@ -164,7 +168,6 @@ class UpdateNotesView(BSModalUpdateView):
     def get_success_url(self):
         return reverse_lazy('operations:patient_details', args=[self.kwargs['pk']] )
 
-
 class UpdateCurrentConditions(UpdateNotesView):
     form_class = UpdateCurrentConditionsModalForm
     template_name = 'modals/update_curretn_conditions.html'
@@ -172,3 +175,43 @@ class UpdateCurrentConditions(UpdateNotesView):
 class UpdateKnownAllergies(UpdateNotesView):
     form_class = UpdateKnownAllergiesModalForm
     template_name = 'modals/update_known_alergies.html'
+
+class MediSearchAIAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        convesation_id = request.data['conversation_id']
+
+        api_key = medisearch_api_key
+        client = MediSearchClient(api_key=api_key)
+        tic = time.time()
+
+        conversation = request.data['conversation']
+        responses = client.send_user_message(conversation_id=convesation_id, conversation=conversation,
+                                             should_stream_response=False, language="English")
+        logger.info("time taken for api response".format(int(time.time() - tic)))
+        for response in responses:
+            return Response(data=response)
+        return Response(data={})
+
+#
+#
+# class MediSearchAIAPIView(View):
+#     def post(self, request, *args, **kwargs):
+#
+#         convesation_id = request.data['conversation_id']
+#
+#         api_key = medisearch_api_key
+#         client = MediSearchClient(api_key=api_key)
+#         tic = time.time()
+#
+#         conversation = request.data['conversation']
+#         responses = client.send_user_message(conversation_id=convesation_id, conversation=conversation,
+#                                              should_stream_response=True, language="English")
+#         logger.info("time taken for api response".format(int(time.time() - tic)))
+#         response = StreamingHttpResponse(responses, content_type='text/plain')
+#         for response in responses:
+#             if response["event"] == "llm_response":
+#                 conversation_store[convesation_id] = responses
+#             elif response['event'] == "article":
+#                 del conversation_store[convesation_id]
+#             return Response(data=response)
+#         return Response(data={})

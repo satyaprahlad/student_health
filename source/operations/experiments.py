@@ -22,5 +22,4 @@ def medisearch_ai():
             llm_answer = response["text"]
             print(llm_answer)
 
-
 medisearch_ai()
