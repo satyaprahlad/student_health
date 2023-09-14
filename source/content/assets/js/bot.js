@@ -23,7 +23,11 @@ function uuid()
 }
 let my_uuid = uuid()
 let conversation = [];
-
+        $("#userInput").keypress(function (event) {
+            if (event.keyCode === 13) {
+                $("#sendButton").click();
+            }
+        });
 function sendMessage() {
     const userMessage = userInput.value;
     lastMessageDiv = null;
@@ -32,6 +36,7 @@ function sendMessage() {
     conversation.push(userMessage)
 
     function fetch_data() {
+        $("#medi_search_status").css("display","inline-block")
         fetch('/operations/medi-search', {
             method: 'POST',
             headers: {
@@ -46,6 +51,7 @@ function sendMessage() {
         })
             .then(response => response.json())
             .then(data => {
+                $("#medi_search_status").css("display","none")
                 if (data['text']) {
                     // if (lastMessageDiv) {
                     //     lastMessageDiv.innerHTML = data['text']
@@ -66,7 +72,10 @@ function sendMessage() {
                 // Display assistant message in the chatbox
 
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                 $("#medi_search_status").css("display","none")
+               console.error('Error:', error)
+            });
     }
 
     fetch_data()

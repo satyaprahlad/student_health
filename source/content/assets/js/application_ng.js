@@ -21,6 +21,14 @@ app.controller('applicationController', function ($scope, $rootScope, $http) {
     $rootScope.commonJsonHeaders = $rootScope.commonJsonHeaders
     $rootScope.commonHttpHeaders = {"X-CSRFToken": csrfToken, "content-type": "text/html"};
     $rootScope.epochStartDate = "1970-01-01";
+    $rootScope.scrollme = function (){
+        var element = document.getElementsByTagName('body');
+window.scrollTo(0, document.body.scrollHeight);
+        console.log("scroolled me")
+
+    }
+
+
 })
 
 app.controller('searchController', function ($timeout, $q, $log, $window, $location, $scope) {
@@ -86,5 +94,16 @@ app.controller('patientDetailsController', function ($timeout, $q, $log, $window
      modalForm(document.getElementById('add_guardian'), {
         formURL: "add-guardian"
     })
+
+    function closeModal() {
+        $(".close").on('click', function (e) {
+            location.reload()
+        });
+    }
+
+    $(".icomoon").on('click', function (){
+        setTimeout(closeModal, 1);
+    })
+
 
 });
