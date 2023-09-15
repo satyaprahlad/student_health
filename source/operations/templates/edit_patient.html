@@ -53,7 +53,7 @@
                                     <p class="text-center mb-0 p-0 pt-2 align-self-center">Create Patient</p>
                                </a>
 
-                            <a style="color:white;" href="#chat" class="nav-link d-flex d-md-block"><h1 class="bi bi-robot icomoon" ng-click="scrollme()"> </h1></a>
+                            <a style="color:white;" href="#chat" class="nav-link d-flex d-md-block"><h1 class="bi bi-robot icomoon" ng-click="scrollme()"> </h1> <p class="text-center mb-0 p-0 pt-2 align-self-center">Ask AI</p></a>
 
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                                         <h6><span class="fbold">CRONIC CONDITIONS: </span>{{ object.chronic_condition }}</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <h6><span class="fbold">RECENT ILLNESS: </span>&NBSP;</h6>
+                                        <h6><span class="fbold">RECENT ILLNESS: </span>{{ object.recent_illness }}</h6>
                                         <h6><span class="fbold">PAST 30DAYS: </span>{{ object.past_30_days_condition }}</h6>
                                         <h6><span class="fbold">PAST 90 DAYS: </span>{{ object.past_90_days_condition }}</h6>
                                     </div>
@@ -189,7 +189,67 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="position-absolute icondiv"><span class="icon-fever1 icomoon"></span></div>
+                        <div class="position-absolute icondiv"><span class="icon-fever1 icomoon btn"></span></div>
+                    </div>
+
+                    <div class="custom-container" id="chat" style="min-height: 400px;     margin-top: 50px;">
+                        <h2 class="fbold h2  pb-2">Ask AI</h2>
+                        <div class="row chatbox" id="chatbox"></div>
+                        <div class="input-area">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" id="userInput" class="user-input"
+                                           placeholder="Ask me any question..." style="width:60%;">
+                                    <button onclick="sendMessage()" id="sendButton" class="btn btn-primary" style="width:20%;">Send
+                                    </button>
+                                    <svg width="48" height="48" id="medi_search_status" style="display: none"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <style>.spinner_jCIR {
+                                            animation: spinner_B8Vq .9s linear infinite;
+                                            animation-delay: -.9s
+                                        }
+
+                                        .spinner_upm8 {
+                                            animation-delay: -.8s
+                                        }
+
+                                        .spinner_2eL5 {
+                                            animation-delay: -.7s
+                                        }
+
+                                        .spinner_Rp9l {
+                                            animation-delay: -.6s
+                                        }
+
+                                        .spinner_dy3W {
+                                            animation-delay: -.5s
+                                        }
+
+                                        @keyframes spinner_B8Vq {
+                                            0%, 66.66% {
+                                                animation-timing-function: cubic-bezier(0.36, .61, .3, .98);
+                                                y: 6px;
+                                                height: 12px
+                                            }
+                                            33.33% {
+                                                animation-timing-function: cubic-bezier(0.36, .61, .3, .98);
+                                                y: 1px;
+                                                height: 22px
+                                            }
+                                        }</style>
+                                        <rect class="spinner_jCIR" x="1" y="6" width="2.8" height="12"/>
+                                        <rect class="spinner_jCIR spinner_upm8" x="5.8" y="6" width="2.8" height="12"/>
+                                        <rect class="spinner_jCIR spinner_2eL5" x="10.6" y="6" width="2.8" height="12"/>
+                                        <rect class="spinner_jCIR spinner_Rp9l" x="15.4" y="6" width="2.8" height="12"/>
+                                        <rect class="spinner_jCIR spinner_dy3W" x="20.2" y="6" width="2.8" height="12"/>
+                                    </svg>
+                                </div>
+                                <div class="col-md-1">
+                            </div>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
                 <!--/ left -->
@@ -201,9 +261,8 @@
                         <div class="card inner-card rounded p-3 border-0">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h5 class="fbold h5">{{ doctor.name }}, {{ doctor.qualification }} </h5>
+                                    <h5 class="fbold h5">{{ doctor.name }} </h5>
                                     <p class="p-0 m-0">{{ doctor.specialization }}</p>
-                                    <p class="p-0 m-0">{{ doctor.institute }}</p>
                                 </div>
                                 <div class="col-md-6 align-self-center">
                                     <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0">
@@ -261,7 +320,6 @@
                             <div class="row">
                                 <div class="col-md-8 align-self-center">
                                     <h5 class="fbold h5">ADD GUARDIAN</h5>
-
                                 </div>
                                 <div class="col-md-4 align-self-center">
                                     <div class="d-md-flex text-md-end justify-content-md-end pt-3 pt-md-0" id="add_guardian">
@@ -277,24 +335,7 @@
                 <!--/ right -->
             </div>
         </div>
-        <div class="custom-container" id="chat" style="min-height: 400px;">
-            <h2 class="fbold h2 text-uppercase pb-2">Search. AI</h2>
-            <div class="row chatbox" id="chatbox"></div>
-        <div class="input-area row">
-            <div class="col-md-6">
-                <input type="text" id="userInput" class="user-input" placeholder="Ask me any question..." >
-                <button onclick="sendMessage()" id="sendButton" class="btn btn-primary">Send</button>
-                <svg width="48" height="48" id="medi_search_status" style="display: none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_jCIR{animation:spinner_B8Vq .9s linear infinite;animation-delay:-.9s}.spinner_upm8{animation-delay:-.8s}.spinner_2eL5{animation-delay:-.7s}.spinner_Rp9l{animation-delay:-.6s}.spinner_dy3W{animation-delay:-.5s}@keyframes spinner_B8Vq{0%,66.66%{animation-timing-function:cubic-bezier(0.36,.61,.3,.98);y:6px;height:12px}33.33%{animation-timing-function:cubic-bezier(0.36,.61,.3,.98);y:1px;height:22px}}</style><rect class="spinner_jCIR" x="1" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_upm8" x="5.8" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_2eL5" x="10.6" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_Rp9l" x="15.4" y="6" width="2.8" height="12"/><rect class="spinner_jCIR spinner_dy3W" x="20.2" y="6" width="2.8" height="12"/></svg>
-            </div>
-                <div class="col-md-1">
 
-            </div>
-
-
-
-
-        </div>
-        </div>
     </main>
     <!--/ main -->
     <!-- scripes-->
