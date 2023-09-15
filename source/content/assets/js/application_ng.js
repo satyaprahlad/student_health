@@ -23,7 +23,7 @@ app.controller('applicationController', function ($scope, $rootScope, $http) {
     $rootScope.epochStartDate = "1970-01-01";
     $rootScope.scrollme = function (){
         var element = document.getElementsByTagName('body');
-window.scrollTo(0, document.body.scrollHeight);
+window.scrollTo(0, document.body.scrollHeight);d
         console.log("scroolled me")
 
     }
