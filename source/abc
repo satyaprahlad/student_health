@@ -1,0 +1,9 @@
+DATABASE_NAME=student_health
+DATABASE_USERNAME=student_health
+DATABASE_PASSWORD=Harshini123@
+SECRET_KEY=NhfTvayqggTBPswCXXhWaN69HuglgZIkM
+DEBUG=True
+LOG_HANDLERS=console
+ENVIRONMENT=local
+ALLOWED_HOSTS=localhost,127.0.0.1
+medisearch_api_key=e677b76b-2868-41b2-8169-3ce7ce5827a7
