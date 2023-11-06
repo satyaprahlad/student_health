@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('accounts/', include('accounts.urls')),
     path('operations/', include('operations.urls')),
+    #path('ws/notification/', include('notification_app.urls'))
 ]
 
 if settings.DEBUG:

@@ -92,7 +92,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'mathfilters',
     'bootstrap_modal_forms',
-    'widget_tweaks'
+    'widget_tweaks',
+
+
+    'channels',
+    'content',
+    'django_celery_beat',
+    'django_celery_results',
+    'notification_app'
 
 
 ]
@@ -130,6 +137,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'app.wsgi.application'
+ASGI_APPLICATION = 'app.asgi.application'
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(CONTENT_DIR, 'tmp/emails')
@@ -230,6 +239,16 @@ LOCALE_PATHS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 5432)],
+        },
+    },
+}
 
 AUTH_USER_MODEL = 'accounts.User'
 audit_fields = ['created_by', 'updated_by', 'created_at', 'updated_at']
